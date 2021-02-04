@@ -24,7 +24,7 @@ done
 [ -z "$outdir" ] && outdir=out/riscv64.sim
 shift $((OPTIND - 1))
 
-$DIR/../tools/run-tests.py -p verbose --report --outdir="$outdir" \
+$DIR/../tools/run-tests.py -p verbose --report --variants=more,dev --outdir="$outdir" \
     cctest \
     unittests \
     wasm-api-tests \
