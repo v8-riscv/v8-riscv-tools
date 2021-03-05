@@ -54,10 +54,14 @@ git fetch riscv
 #git checkout riscv-porting-dev
 git checkout riscv64
 
-cp patches/build.patch build/
-pushd build
-git apply build.patch
-popd
+# the patches folder was removed before upstreaming.
+# And you can download it in another repo.
+wget -O build.patch https://raw.githubusercontent.com/v8-riscv/v8-riscv-tools/main/riscv64-cross-build.patch
+cd build
+git apply ../build.patch
+cd ..
+# Remember to use `git stash` before you run `gclient sync`
+
 
 # Install deps. may need sudo
 # tip: remember add `--no-chromeos-fonts` if you are in mainland China
