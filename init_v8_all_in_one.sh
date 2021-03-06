@@ -37,6 +37,10 @@ mkdir -p $V8_ROOT
 cd $V8_ROOT
 fetch v8
 
+# This is the first time you download and build v8
+# So you do not need to run 'gclient sync' to update the build env.
+#gclient sync
+
 # Currently the RISC-V is a tier-3 backend of chromium/v8, which means
 # that new commits in upstream might break riscv64 backend without
 # notice. So we maintain a stable branch for RISC-V.
@@ -47,6 +51,9 @@ git remote | grep -q riscv || \
 	#git remote add riscv git@github.com:v8-riscv/v8.git
 git fetch riscv
 git checkout riscv/riscv64
+
+wget -O build.patch https://raw.githubusercontent.com/v8-riscv/v8-riscv-tools/main/riscv64-cross-build.patch
+git apply build.patch
 
 # Install deps. may need sudo
 # tip: remember add `--no-chromeos-fonts` if you are in mainland China
@@ -109,6 +116,9 @@ export PATH=$PATH:$RV_HOME/bin
 echo "export PATH=$PATH:$RV_HOME/bin" >> $HOME/.bashrc
 
 
+# if you are using the toolchain installed by 'apt',
+# then you should not run this sed script. It is only
+# used for self built toolchain.
 sed -i 's,riscv64-linux-gnu,riscv64-unknown-linux-gnu,' \
     $V8_ROOT/v8/build/toolchain/linux/BUILD.gn
 
