@@ -54,6 +54,8 @@ git checkout riscv/riscv64
 
 wget -O build.patch https://raw.githubusercontent.com/v8-riscv/v8-riscv-tools/main/riscv64-cross-build.patch
 git apply build.patch
+wget -O buildtools.patch https://raw.githubusercontent.com/v8-riscv/v8-riscv-tools/main/riscv64-cross-buildtools.patch
+git apply buildtools.patch
 
 # Install deps. may need sudo
 # tip: remember add `--no-chromeos-fonts` if you are in mainland China
