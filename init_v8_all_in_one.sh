@@ -37,9 +37,7 @@ mkdir -p $V8_ROOT
 cd $V8_ROOT
 fetch v8
 
-# This is the first time you download and build v8
-# So you do not need to run 'gclient sync' to update the build env.
-#gclient sync
+gclient sync
 
 # Currently the RISC-V is a tier-3 backend of chromium/v8, which means
 # that new commits in upstream might break riscv64 backend without
@@ -54,8 +52,6 @@ git checkout riscv/riscv64
 
 wget -O build.patch https://raw.githubusercontent.com/v8-riscv/v8-riscv-tools/main/riscv64-cross-build.patch
 git apply build.patch
-wget -O buildtools.patch https://raw.githubusercontent.com/v8-riscv/v8-riscv-tools/main/riscv64-cross-buildtools.patch
-git apply buildtools.patch
 
 # Install deps. may need sudo
 # tip: remember add `--no-chromeos-fonts` if you are in mainland China
